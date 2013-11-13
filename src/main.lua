@@ -1,9 +1,4 @@
 pointTable = {}
-g = 8
-ts = 0.1
-desc = 5
-
-maxSpeed = 20
 
 ModPlayer = require "player"
 
@@ -20,7 +15,7 @@ function love.load()
 	 love.graphics.setColor(255,255,255)
 end
 
-function love.update()
+function love.update(dt)
 	 if(keys._q == 1) then
 		player.translate(-1,0)
 	 end
@@ -34,7 +29,7 @@ function love.update()
 	 	player.translate(0,-1)
 	 end
 	 
-	 player.updatePosition()
+	 player.updatePosition(dt)
 end
 
 function love.draw()	 
@@ -58,7 +53,7 @@ function love.keypressed(key, unicode)
 	    keys._q = 1
 	 elseif (key == 'd') then
 	    keys._d = 1
-	 elseif (key == 'z') then
+	 elseif (key == 'w') then
 	    keys._z = 1
 	 elseif (key == 's') then
 	    keys._s = 1
