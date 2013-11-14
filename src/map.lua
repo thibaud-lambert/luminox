@@ -20,8 +20,8 @@ end
 
 
 function map.draw()
-	for y=1, map.width do
-		for x=1, map.height do
+	for y=0, map.width do
+		for x=0, map.height do
 			if map[y][x] == 1 then
 				love.graphics.rectangle("line", x * 32, y * 32, 32, 32)
 			end

@@ -2,6 +2,8 @@ player = {}
 player._x = 0
 player._y = 0
 
+player.size = 16
+
 player._speedx = 0
 player._speedy = 0
 
@@ -14,12 +16,25 @@ descFactor = 5
 accFactor = 100
 
 function player.draw()
-	love.graphics.rectangle("fill",player._x,player._y,16,16)
+	love.graphics.rectangle("fill",player._x,player._y,player.size,player.size)
 end
 
 function player.translate(x, y)
 	player._transx = player._transx + x
 	player._transy = player._transy + y 
+end
+
+function player.noCollision(x,y,map)
+	if map.testCollision(x, y) then
+		return false
+	elseif map.testCollision(x + player.size, y) then
+		return false
+	elseif map.testCollision(x, y + player.size) then
+		return false
+	elseif map.testCollision(x + player.size, y + player.size) then
+		return false
+	end
+	return true
 end
 
 function player.updatePosition(dt)
@@ -48,12 +63,18 @@ function player.updatePosition(dt)
 	x_tmp = player._x + player._speedx * dt
 	y_tmp = player._y + player._speedy * dt
 	
-	if map.testCollision(x_tmp, y_tmp) == false then
+	if player.noCollision(x_tmp, y_tmp, map) then
 		player._x = x_tmp
 		player._y = y_tmp
 	else
-		player._speedx = 0
-		player._speedy = 0
+		if player.noCollision(x_tmp, player._y, map) == false then
+			player._speedx = 0
+		end
+		if player.noCollision(player._x, y_tmp, map) == false then
+			player._speedy = 0
+		end
+		player._x = player._x + player._speedx * dt
+		player._y = player._y + player._speedy * dt
 	end
 	
 	player._transx = 0
