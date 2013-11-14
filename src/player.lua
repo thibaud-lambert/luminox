@@ -9,6 +9,8 @@ player._speedy = 0
 
 player._transx = 0
 player._transy = 0
+player._directionx = 0
+player._directiony = 0
 
 minSpeed = 10
 maxSpeed = 1000
@@ -17,6 +19,7 @@ accFactor = 100
 
 function player.draw()
 	love.graphics.rectangle("fill",player._x,player._y,player.size,player.size)
+	love.graphics.line(player._x, player._y, player._directionx, player._directiony)
 end
 
 function player.translate(x, y)
@@ -35,6 +38,11 @@ function player.noCollision(x,y,map)
 		return false
 	end
 	return true
+end
+
+function player.updateDirection(dirx, diry)
+	player._directionx = dirx
+	player._directiony = diry
 end
 
 function player.updatePosition(dt)

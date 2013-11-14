@@ -31,9 +31,12 @@ function love.update(dt)
 	 if (keys._z == 1) then
 	 	player.translate(0,-1)
 	 end
-	 
 	 player.updatePosition(dt)
-end
+	 mx, my = love.mouse.getPosition()
+	 mx = mx - love.graphics.getWidth()/2.0
+	 my = my - love.graphics.getHeight()/2.0
+	 player.updateDirection(mx, my)
+ end
 
 function love.draw()	 
 	 -- love.graphics.print('Hello World!', 400, 300)
