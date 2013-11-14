@@ -73,6 +73,10 @@ function player.updatePosition(dt)
 		if player.noCollision(player._x, y_tmp, map) == false then
 			player._speedy = 0
 		end
+		if player.noCollision(player._x, y_tmp, map) and player.noCollision(x_tmp, player._y, map) then
+			player._speedx = 0
+			player._speedy = 0
+		end
 		player._x = player._x + player._speedx * dt
 		player._y = player._y + player._speedy * dt
 	end
