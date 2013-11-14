@@ -37,14 +37,15 @@ function player.translate(x, y)
 	player._transy = player._transy + y 
 end
 
+function player.isExit(x,y,map)
+	if map.testExit(x, y) or map.testExit(x + player.size, y) or map.testExit(x, y + player.size) or map.testExit(x + player.size, y + player.size) then
+		return true
+	end
+	return false
+end
+
 function player.noCollision(x,y,map)
-	if map.testCollision(x, y) then
-		return false
-	elseif map.testCollision(x + player.size, y) then
-		return false
-	elseif map.testCollision(x, y + player.size) then
-		return false
-	elseif map.testCollision(x + player.size, y + player.size) then
+	if map.testCollision(x, y) or map.testCollision(x + player.size, y) or map.testCollision(x, y + player.size) or map.testCollision(x + player.size, y + player.size) then
 		return false
 	end
 	return true

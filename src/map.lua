@@ -5,7 +5,12 @@ map.height = 0
 map.spawn_x = 0
 map.spawn_y = 0
 
+map.exit_x = 0
+map.exit_y = 0
+
 map._cubeColor = {255,255,255}
+map._spawnColor = {50,50,200}
+map._exitColor = {200,50,50}
 
 function map.generate(width, height, seed)
 	math.randomseed(seed)
@@ -27,6 +32,10 @@ function map.generate(width, height, seed)
 	map.spawn_x = math.random(map.height-1)
 	map.spawn_y = math.random(map.width-1)
 	map.grid[map.spawn_y][map.spawn_x] = 0
+	
+	map.exit_x = math.random(map.height-1)
+	map.exit_y = math.random(map.width-1)
+	map.grid[map.exit_y][map.exit_x] = 0
 end
 
 
@@ -39,12 +48,27 @@ function map.draw()
 			end
 		end
 	end
+	
+	love.graphics.setColor(map._exitColor)
+	love.graphics.rectangle("fill", map.exit_x * 32, map.exit_y * 32, 32, 32)
+	
+	love.graphics.setColor(map._spawnColor)
+	love.graphics.rectangle("fill", map.spawn_x * 32, map.spawn_y * 32, 32, 32)
 end
 
 function map.testCollision(x, y)
 	x_grid = math.floor(x/32)
 	y_grid = math.floor(y/32)
 	if x_grid < 0 or y_grid < 0 or x_grid > map.height or y_grid > map.width or map.grid[y_grid][x_grid] == 1 then
+        return true
+    end
+    return false
+end
+
+function map.testExit(x,y)
+	x_grid = math.floor(x/32)
+	y_grid = math.floor(y/32)
+	if y_grid == map.exit_y and x_grid == map.exit_x then
         return true
     end
     return false

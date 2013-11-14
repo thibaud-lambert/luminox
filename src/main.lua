@@ -11,13 +11,24 @@ keys._s = 0
 keys._z = 0
 keys._space = 0
 
+seed = 1234
+
+function generate()
+	 map.generate(50,50,seed)
+	 player.spawn(map.spawn_x *32 , map.spawn_y *32)
+end
+
+function nextLevel()
+	if player.isExit(player._x, player._y, map) then 
+		seed = seed+1
+		love.load()
+	end
+end
 
 function love.load()
-	 map.generate(30,60,1234)
-	 player.spawn(map.spawn_x *32 , map.spawn_y *32)
 	 love.graphics.setBackgroundColor(0,0,0)
 	 love.graphics.setColor(255,255,255)
-
+	 generate()
 end
 
 function love.update(dt)
@@ -38,6 +49,7 @@ function love.update(dt)
 	 mx = mx - love.graphics.getWidth()/2.0
 	 my = my - love.graphics.getHeight()/2.0
 	 player.updateDirection(mx, my)
+	 nextLevel()
  end
 
 function love.draw()	 
