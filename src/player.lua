@@ -45,8 +45,16 @@ function player.updatePosition(dt)
 		end
 	end
 	
-	player._x = player._x + player._speedx * dt
-	player._y = player._y + player._speedy * dt
+	x_tmp = player._x + player._speedx * dt
+	y_tmp = player._y + player._speedy * dt
+	
+	if map.testCollision(x_tmp, y_tmp) == false then
+		player._x = x_tmp
+		player._y = y_tmp
+	else
+		player._speedx = 0
+		player._speedy = 0
+	end
 	
 	player._transx = 0
 	player._transy = 0

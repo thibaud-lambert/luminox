@@ -1,6 +1,7 @@
 pointTable = {}
 
 ModPlayer = require "player"
+ModMap = require "map"
 
 keys = {}
 keys._q = 0
@@ -13,6 +14,7 @@ keys._space = 0
 function love.load()
 	 love.graphics.setBackgroundColor(0,0,0)
 	 love.graphics.setColor(255,255,255)
+	 map.generate(20,20,1234)
 end
 
 function love.update(dt)
@@ -37,7 +39,8 @@ function love.draw()
 	 --if(table.getn(pointTable) > 3 ) then
 	 --     love.graphics.line(pointTable)
      --    end
-	 love.graphics.rectangle("fill",player._x,player._y,16,16)
+	 map.draw()
+	 player.draw()	
 end
 
 function love.mousepressed()
