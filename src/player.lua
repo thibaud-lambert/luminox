@@ -15,6 +15,11 @@ maxSpeed = 1000
 descFactor = 5
 accFactor = 100
 
+function player.spawn(x,y)
+	player._x = x
+	player._y = y
+end
+
 function player.draw()
 	love.graphics.rectangle("fill",player._x,player._y,player.size,player.size)
 end

@@ -13,9 +13,11 @@ keys._space = 0
 
 
 function love.load()
+	 map.generate(30,60,1234)
+	 player.spawn(map.spawn_x *32 , map.spawn_y *32)
 	 love.graphics.setBackgroundColor(0,0,0)
 	 love.graphics.setColor(255,255,255)
-	 map.generate(20,20,1234)
+
 end
 
 function love.update(dt)
