@@ -1,8 +1,8 @@
 pointTable = {}
 
-ModPlayer = require "player"
-ModMap = require "map"
-ModCamera = require "camera"
+require "player"
+require "map"
+require "camera"
 
 keys = {}
 keys._q = 0
@@ -43,7 +43,7 @@ function love.draw()
 	 --if(table.getn(pointTable) > 3 ) then
 	 --     love.graphics.line(pointTable)
      --    end
-	camera.draw(player)	
+	camera.draw(player._x, player._y)	
 	map.draw()
 	player.draw()
 	
