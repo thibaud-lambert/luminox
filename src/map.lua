@@ -5,6 +5,7 @@ map.height = 0
 map.spawn_x = 0
 map.spawn_y = 0
 
+map._cubeColor = {255,255,255}
 
 function map.generate(width, height, seed)
 	math.randomseed(seed)
@@ -33,6 +34,7 @@ function map.draw()
 	for y=0, map.width do
 		for x=0, map.height do
 			if map.grid[y][x] == 1 then
+				love.graphics.setColor(map._cubeColor)
 				love.graphics.rectangle("line", x * 32, y * 32, 32, 32)
 			end
 		end

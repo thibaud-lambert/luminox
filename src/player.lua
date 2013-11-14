@@ -9,6 +9,11 @@ player._speedy = 0
 
 player._transx = 0
 player._transy = 0
+player._directionx = 0
+player._directiony = 0
+
+player._color = {255,255,255}
+player._laserColor = {255,0,0}
 
 minSpeed = 10
 maxSpeed = 1000
@@ -21,7 +26,10 @@ function player.spawn(x,y)
 end
 
 function player.draw()
+	love.graphics.setColor(player._color)
 	love.graphics.rectangle("fill",player._x,player._y,player.size,player.size)
+	love.graphics.setColor(player._laserColor)
+	love.graphics.line(player._x, player._y, player._x + player._directionx, player._y + player._directiony)
 end
 
 function player.translate(x, y)
@@ -40,6 +48,11 @@ function player.noCollision(x,y,map)
 		return false
 	end
 	return true
+end
+
+function player.updateDirection(dirx, diry)
+	player._directionx = dirx
+	player._directiony = diry
 end
 
 function player.updatePosition(dt)
