@@ -13,9 +13,12 @@ keys._space = 0
 
 seed = 1234
 
+timer = 0
+
 function generate()
 	 map.generate(50,50,seed)
 	 player.spawn(map.spawn_x *32 , map.spawn_y *32)
+	 timer = love.timer.getTime()
 end
 
 function nextLevel()
@@ -57,6 +60,7 @@ function love.draw()
 	 --if(table.getn(pointTable) > 3 ) then
 	 --     love.graphics.line(pointTable)
      --    end
+	love.graphics.print("Time: "..tostring(love.timer.getTime()-timer).."s", 10, 10)
 	camera.draw(player._x, player._y)	
 	map.draw()
 	player.draw()
