@@ -39,9 +39,13 @@ function map.generate(width, height, seed)
 end
 
 
-function map.draw()
-	for y=0, map.width do
-		for x=0, map.height do
+function map.draw(posX, posY)
+	minX = math.max(0,math.floor((posX-love.graphics.getWidth()/2)/32))
+	maxX = math.min(map.width,math.floor((posX+love.graphics.getWidth()/2)/32)+1)
+	minY = math.max(0,math.floor((posY-love.graphics.getHeight()/2)/32))
+	maxY = math.min(map.height,math.floor((posY+love.graphics.getHeight()/2)/32)+1)
+	for y=minY, maxY do
+		for x=minX, maxX do
 			if map.grid[y][x] == 1 then
 				love.graphics.setColor(map._cubeColor)
 				love.graphics.rectangle("line", x * 32, y * 32, 32, 32)

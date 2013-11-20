@@ -16,7 +16,7 @@ seed = 1234
 timer = 0
 
 function generate()
-	 map.generate(50,50,seed)
+	 map.generate(500,500,seed)
 	 player.spawn(map.spawn_x *32 , map.spawn_y *32)
 	 timer = love.timer.getTime()
 end
@@ -62,7 +62,7 @@ function love.draw()
      --    end
 	love.graphics.print("Time: "..tostring(love.timer.getTime()-timer).."s", 10, 10)
 	camera.draw(player._x, player._y)	
-	map.draw()
+	map.draw(player._x, player._y)
 	player.draw()
 	
 end
